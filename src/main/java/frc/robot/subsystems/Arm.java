@@ -25,19 +25,19 @@ import edu.wpi.first.wpilibj2.command.ProfiledPIDSubsystem;
 public class Arm extends ProfiledPIDSubsystem {
     private static final CANSparkMax motorR = Util.createSparkMAX(3, MotorType.kBrushless);
     private static final CANSparkMax motorL = Util.createSparkMAX(1, MotorType.kBrushless);
-    private SparkMaxAbsoluteEncoder armEncoder = motorR.getAbsoluteEncoder(Type.kDutyCycle);
-    private RelativeEncoder relArmEncoder = motorR.getEncoder();
+    private SparkMaxAbsoluteEncoder armEncoder = motorR.getAbsoluteEncoder(Type.kDutyCycle); //new absoulute encoder for arm
+    private RelativeEncoder relArmEncoder = motorR.getEncoder(); //update the value of this new encoder with the SPARKmax encoder
     //private static final Encoder armEncoder = new Encoder(4,3);
 
     private SparkMaxPIDController pidController;
     
     private static final ArmFeedforward FEEDFORWARD = new ArmFeedforward(ArmConstants.kS, ArmConstants.kCos, ArmConstants.kV, ArmConstants.kA);
-    
+    // Error --> FFC --> Feedback Control
     private static Arm instance;
     public static Arm getInstance() {
         if(instance == null) instance = new Arm();
-        return instance;
-
+        return instance; 
+        //creates an instance of the arm
     }
     
     /**
@@ -118,6 +118,8 @@ public class Arm extends ProfiledPIDSubsystem {
      */
     public void resetEncoders() {
         relArmEncoder.setPosition(0.0);
+        // resets the arm encoder position to currently where it is
+        // rememeber this*
     }
     
     @Override
@@ -155,6 +157,7 @@ public class Arm extends ProfiledPIDSubsystem {
 
         double feedforward = FEEDFORWARD.calculate(setpoint.position, setpoint.velocity);
         motorL.setVoltage(output + feedforward);
+        // update the gains when you know you are about to pull current
         
 
         // motor.set(setpoint.velocity/13.209 + output/12); //without feedforward, use PID to correct error

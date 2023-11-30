@@ -24,7 +24,7 @@ import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Drivetrain implements Subsystem {
-    private static Drivetrain instance = null;
+    private static Drivetrain instance = null; // resets your drivetrain instance
     private static final TalonFX
         leftMaster = Util.createTalonFX(DrivetrainConstants.leftMaster),
         leftSlave = Util.createTalonFX(DrivetrainConstants.leftSlave),
@@ -42,7 +42,7 @@ public class Drivetrain implements Subsystem {
     public static DifferentialDriveOdometry ODOMETRY = new DifferentialDriveOdometry(Rotation2d.fromDegrees(RobotContainer.navX.getAngle()), getLeftEnc(), getRightEnc());
     private Drivetrain() {
         leftSlave.follow(leftMaster);
-        rightSlave.follow(rightMaster);
+        rightSlave.follow(rightMaster); // make the back l and r motors follow the front motors
         //leftSlave.setNeutralMode(NeutralMode.Coast);
         //rightSlave.setNeutralMode(NeutralMode.Coast);
         // Inverting opposite sides of the drivetrain
@@ -71,11 +71,11 @@ public class Drivetrain implements Subsystem {
 
     public static void setOpenLoop(double left, double right) {
         leftMaster.set(ControlMode.PercentOutput, left);
-        rightMaster.set(ControlMode.PercentOutput, right);
+        rightMaster.set(ControlMode.PercentOutput, right); //Depending on the value (1 thru -1, takes the percent of that number = signal sent)
     }
 
     public static void setVoltages(double leftv, double rightv) {
-        setOpenLoop(leftv/Constants.kMaxVoltage, rightv/Constants.kMaxVoltage);
+        setOpenLoop(leftv/Constants.kMaxVoltage, rightv/Constants.kMaxVoltage); // limits the voltage
     }
 
     public static void setInverted(boolean status) { //For defense, the back of the robot becomes the front
@@ -85,9 +85,9 @@ public class Drivetrain implements Subsystem {
             kInverted = 1;
         }
     }
-
+    //inverts the motors works if the motor is already flipped or not
     public void stop() {
-        setOpenLoop(0, 0);
+        setOpenLoop(0, 0); // set speed to 0
     }
 
     /**

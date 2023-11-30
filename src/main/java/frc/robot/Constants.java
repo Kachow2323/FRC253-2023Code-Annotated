@@ -81,6 +81,7 @@ public class Constants {
         public static final double kConeMidScorePosition = -28.714066;
         public static final double kConeMidSidewaysScorePosition = -17.286; // not used
         public static final double kConeHighScorePosition = -35;
+        //self-explanatory
         
 
 
@@ -106,6 +107,7 @@ public class Constants {
         public static final double kConeMidSidewaysScorePosition = 20.167; // not used
         public static final double kConeHighScorePosition = 38.761509;
         public static final double kStow = 0.0;
+        //self explanatory
 
         /* PID Constants */
         public static double kP = 0.2; // Porpotianl Gain for Feedback Control Loops
@@ -160,7 +162,7 @@ public class Constants {
 
         public static final double sdx = 0.2; // unused
 
-        public static final double kPV = 0;
+        public static final double kPV = 0; //not 100% sure what this does, no comment
     }
 
     public static class IntakeConstants {
@@ -187,5 +189,6 @@ public class Constants {
         // public static double mountAngle = 48; //TODO: verify distance constants
         public static double goalHeightInches = 104;
         public static double limelightHeightInches = 25.5;
+        // ignore
     }
 }
