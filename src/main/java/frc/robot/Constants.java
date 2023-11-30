@@ -11,17 +11,17 @@ import frc.robot.Units;
 */
 //Hello
 public class Constants {
-    public static final double dt = 0.02;
-    public static final double kMaxVoltage = 12.0;
+    public static final double dt = 0.02; // no clue
+    public static final double kMaxVoltage = 12.0; //max voltage if we draw current for use
 
     public static class InputPorts {
-        public static final int driverController = 0, operatorController = 1;
+        public static final int driverController = 0 /*Port 0 is driver */, operatorController = 1; /*Port 1 is Operator */
     }
 
     public static class AutoConstants {
         
-        public static final double[] DXMConstraints = {1, 0.5}, TXDConstraints = {480, 360};
-        public static final double hubXOffset = 5, distToCargo = 5;
+        public static final double[] DXMConstraints = {1, 0.5}, TXDConstraints = {480, 360}; //Pathweaver Error Limits
+        public static final double hubXOffset = 5, distToCargo = 5; // 2022 code stuff
     }
 
     public static class DriverConstants {
@@ -36,22 +36,29 @@ public class Constants {
     
     public static class ArmConstants {
         public static final int actuateMotorL = 4; //change to actuatemotor
-        public static final int actuateMotorR = 0;
+        public static final int actuateMotorR = 0; //unused i think
         /* PID Constants */
-        public static double kP = 0.1;
-        public static double kI = 0;
-        public static double kD = 0.25;
+        public static double kP = 0.1; // Porpotianl Gain for Feedback Control Loops
+        public static double kI = 0; // Intergral Gain for Feedback Control Loops
+        public static double kD = 0.25; // Derivative Gain for Feedback Control Loops
+        // Manually Eye-balled at comp :insert crying emoji:
+
+        // Controller to apply corrections once an error is detected. P = Gain x Error, I = Gain x Duration & Magnitude. D = Gain x rate of Change
+        // Simple Terms: P = Get there, I = If you are getting there slowly, get there faster, D = If going to fast, slow down 
+        // Flaws: P: Steady-State error: runs close to setpoint ("asymptote"), I: Overshoots, D: None, perfect child
+        // Tuning = Getting the right gain values
 
         /* Feedforward Constants */
-        public static double kS = 0.402;
-        public static double kCos = 0.771;
-        public static double kV = 0.758;
-        public static double kA = 0.00717;
+        public static double kS = 0.402; //gains in units of volts, used for overcoming friction
+        public static double kCos = 0.771; 
+        public static double kV = 0.758; //gains in units of volts * seconds / distance
+        public static double kA = 0.00717; //gains in units of volts * seconds^2 / distance (Can be ommited)
+
 
         /* Intake constants */
         public static double kMaxVelocity = 0.25; // Maximum velocity to turn arm at, radians per second
         public static double kMaxAcceleration = 2; // Maximum acceleration to turn arm at, radians per second per second
-        public static double kArmOffset = Math.toRadians(27); //
+        public static double kArmOffset = Math.toRadians(27); 
 
         public static edu.wpi.first.math.trajectory.TrapezoidProfile.State kStartRads;
 
@@ -101,15 +108,22 @@ public class Constants {
         public static final double kStow = 0.0;
 
         /* PID Constants */
-        public static double kP = 0.2;
-        public static double kI = 0.0;
-        public static double kD = 0.1;
+        public static double kP = 0.2; // Porpotianl Gain for Feedback Control Loops
+        public static double kI = 0.0; // Intergal Gain for Feedback Control Loops
+        public static double kD = 0.1; // Derivative Gain for Feedback Control Loops
+
+        // Controller to apply corrections once an error is detected. P = Gain x Error, I = Gain x Duration & Magnitude. D = Gain x rate of Change
+        // Simple Terms: P = Get there, I = If you are getting there slowly, get there faster, D = If going to fast, slow down 
+        // Flaws: P: Steady-State error: runs close to setpoint ("asymptote"), I: Overshoots, D: None, perfect child
+        // Tuning = Getting the right gain values
 
         /* Feedforward Constants */
         public static double kS = 0.402;
         public static double kCos = 0.771;
         public static double kV = 0.758;
         public static double kA = 0.00717;
+
+        // Refer to lines 52 for FeedFowardControl Schemes
 
         public static double kShelf = 40.118641; // 39.928169;
 
@@ -119,9 +133,9 @@ public class Constants {
         public static final int
         /* Drivetrain motor IDs */ 
             leftMaster = 3, // TalonFX right Masters & Slaves currently reversed
-            leftSlave = 1, // TalonFX
-            rightMaster = 4, // TalonFX
-            rightSlave = 2; // TalonFX
+            leftSlave = 1, // TalonFX ID
+            rightMaster = 4, // TalonFX ID
+            rightSlave = 2; // TalonFX ID
         
         /* feedforward constants */
         public static final double kV = 1.;// 2.4372; // voltage over velocity (V/(meters/second))
@@ -144,18 +158,18 @@ public class Constants {
         public static final double kMaxTurnRate = -5.283706; //Max turn rate in radians per second
         public static final double kMaxCurvature = kMaxTurnRate / kMaxSpeedMPS; // Maximum turn rate in radians per meter TODO: update
 
-        public static final double sdx = 0.2;
+        public static final double sdx = 0.2; // unused
 
         public static final double kPV = 0;
     }
 
     public static class IntakeConstants {
         /* Motors */
-        public static final int rollerMotor = 3;
+        public static final int rollerMotor = 3; // CAN ID
     }
 
 
-    public static class VisionConstants {
+    public static class VisionConstants { //idk if we use this
        
         /* Turn PID Constants */
         public static double kPTurn = 0.1;
