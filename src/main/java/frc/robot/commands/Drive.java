@@ -51,7 +51,7 @@ public class Drive implements Command {
                 if (throttle != 0) {
                     left = (throttle + throttle * turn * DriverConstants.kTurnSens) * DriverConstants.kDriveSens;
                     right = (throttle - throttle * turn * DriverConstants.kTurnSens) * DriverConstants.kDriveSens;
-
+                    // i dont want to explain this
                     // Normalize
                     double maxMagnitude = Math.max(Math.abs(left), Math.abs(right));
                     

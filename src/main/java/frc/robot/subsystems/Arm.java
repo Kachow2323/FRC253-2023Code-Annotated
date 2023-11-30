@@ -171,19 +171,19 @@ public class Arm extends ProfiledPIDSubsystem {
     public void setArmPositionAuto(Intake.ScorePos position) {
         double encoderVal = 0.;
         switch (position) {
-            case HIGH:
+            case HIGH: //high pos enum
                 encoderVal = (Intake.cone) ? ArmConstants.kConeHighScorePosition : ArmConstants.kCubeHighScorePosition;
                 break;
-            case MID:
+            case MID: //mid pos enum
                 encoderVal = (Intake.cone) ? ArmConstants.kConeMidScorePosition : ArmConstants.kCubeMidScorePosition;
                 break;
-            case LOW:
+            case LOW: //low pos enum
                 encoderVal = (Intake.cone) ? ArmConstants.kConeFloorUprightIntakePosition : ArmConstants.kCubeFloorIntakePosition;
                 break;
             case STOW:
                 encoderVal = ArmConstants.kStow;
                 break;
-            case SHELF:
+            case SHELF: //shelf pos enum
                 encoderVal = ArmConstants.kShelf;
                 break;
             default:
@@ -191,11 +191,13 @@ public class Arm extends ProfiledPIDSubsystem {
         }
         pidController.setReference(encoderVal, ControlType.kPosition);
         SmartDashboard.putNumber("Arm SetPoint", encoderVal);
+        //SmartDashboard usage
     }
 
     public void setArmPosition(double position) {
         pidController.setReference(position, ControlType.kPosition);
         SmartDashboard.putNumber("Arm SetPoint", position);
+        //new setpoint "PID"
     }
 
     public void setArmPositionDegree(double degreePosition) { //define degreePosition earlier

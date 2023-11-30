@@ -27,7 +27,7 @@ public class Auto {
         private Selection(int val) {
             this.val = val;
         }
-    }
+    } //auto selector by choice
 
     public static Command getShootCommand() { //Drive up and shoot
         return new SequentialCommandGroup(
@@ -35,12 +35,12 @@ public class Auto {
             //new DriveXMeters(AutoConstants.hubXOffset, AutoConstants.DXMConstraints[0], AutoConstants.DXMConstraints[1]), 
             // new SmartShoot(RobotContainer.getDistance()).withTimeout(4) //TODO: adjust shooter velocity based on distance
         );
-    }
+    } //not used, 2022 codes
 
     public static Command getBackupCommand() { //Back up and find new ball
         return new SequentialCommandGroup(
             // new DriveXMeters(-AutoConstants.backupDistance, AutoConstants.DXMConstraints[0], AutoConstants.DXMConstraints[1]),
-            new TurnXDegrees(180, AutoConstants.TXDConstraints[0], AutoConstants.TXDConstraints[1])
+            new TurnXDegrees(180, AutoConstants.TXDConstraints[0], AutoConstants.TXDConstraints[1]) //pathweaver, unused
         );
     }
 
@@ -52,7 +52,7 @@ public class Auto {
             new WaitCommand(.5),
             new RunCommand(() -> Drivetrain.setOpenLoop(-0.25, -0.25), RobotContainer.drivetrain).withTimeout(2.0),
             new RunCommand(() -> RobotContainer.intake.set(0)).withTimeout(1)
-        );
+        ); //Sequence of Events: Set arm and wrist pos to low pos. Spit out cone and then wait, drive back for a set time length and stop running intake
     }
 
     public static Command highConeBackup() {
@@ -72,6 +72,7 @@ public class Auto {
             new RunCommand(() -> Drivetrain.setOpenLoop(-0.25, -0.25), RobotContainer.drivetrain).withTimeout(1.75),
             new RunCommand(() -> RobotContainer.intake.set(0)).withTimeout(2)
 // "HIGH" = Mid Cone (idk why) - Timing shoud work and has been tested on practice field
+// Sequence of Events: Set pos, back up slightly, set new scoring pos, drop off cone, set stow pos, drive back. pray it works.
         );
     }
 }
