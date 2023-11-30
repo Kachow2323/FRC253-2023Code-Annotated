@@ -44,7 +44,7 @@ public class Constants {
         // Manually Eye-balled at comp :insert crying emoji:
 
         // Controller to apply corrections once an error is detected. P = Gain x Error, I = Gain x Duration & Magnitude. D = Gain x rate of Change
-        // Simple Terms: P = Get there, I = If you are getting there slowly, get there faster, D = If going to fast, slow down 
+        // Simple Terms: P = Get there, I = If you are getting there slowly, get there faster, D = If going too fast, slow down 
         // Flaws: P: Steady-State error: runs close to setpoint ("asymptote"), I: Overshoots, D: None, perfect child
         // Tuning = Getting the right gain values
 
@@ -53,7 +53,13 @@ public class Constants {
         public static double kCos = 0.771; 
         public static double kV = 0.758; //gains in units of volts * seconds / distance
         public static double kA = 0.00717; //gains in units of volts * seconds^2 / distance (Can be ommited)
-
+        // FeeedForward Control Loops: Let's say for example we need to use the motors, and we know using motors require power.
+        // If we know in advance that we will be using power = error, Feedback Control can only react when there is an error present
+        // ex: motor rpm from 100 to 200 rpm. It will draw power, about 3 volts.
+        // Graphically, we increase our rpm "exponentially" and level off at our setpoint. If we pull power rn, the voltage will drop.
+        // Instead of the feedback controller taking into effect and slowly brining the rpm back up, we apply Feed Forward into system to "fill the pothole"
+        //FeedForawrd can also be used to apply bandwitdh limits to remove noise in sensors/sys or to decrease our disturbances.
+        //It is to not that lowering the bandwitdh range, will lower the response time, which may dispaly increases in delay time until action is applied.
 
         /* Intake constants */
         public static double kMaxVelocity = 0.25; // Maximum velocity to turn arm at, radians per second
@@ -63,7 +69,7 @@ public class Constants {
         public static edu.wpi.first.math.trajectory.TrapezoidProfile.State kStartRads;
 
         public static double autoDisplacementRads;
-        public static int gearRatio = 25;
+        public static int gearRatio = 25; //physical gear ration on the SparkMAX
         public static double kShelf = -32.428291; //-32.094963;
 
         //arm encoder values
@@ -82,13 +88,10 @@ public class Constants {
         public static final double kConeMidSidewaysScorePosition = -17.286; // not used
         public static final double kConeHighScorePosition = -35;
         //self-explanatory
-        
-
-
     }
 
     public static class WristConstants {
-        public static final int intakeMotor = 4;
+        public static final int intakeMotor = 4; 
         public static final int wristMotor = 10;
         public static final double gearRatio = 100.0;
         public static double autoDisplacementRads;

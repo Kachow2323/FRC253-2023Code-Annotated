@@ -62,7 +62,6 @@ public class Drivetrain implements Subsystem {
         SmartDashboard.putNumber("Right Master output: ", getRightEncVelocityMeters());
         SmartDashboard.putNumber("NavX HEADING", RobotContainer.navX.getAngle());
         //SmartDashboard.putNumber("Right Slave output: ", rightSlave.getMotorOutputPercent());
-        
     }
     private static int kInverted = 1; //1 or -1
     public static int getkInvert() { //only for teleop driving, up to user to read this flag
@@ -70,7 +69,7 @@ public class Drivetrain implements Subsystem {
     }
 
     public static void setOpenLoop(double left, double right) {
-        leftMaster.set(ControlMode.PercentOutput, left);
+        leftMaster.set(ControlMode.PercentOutput, left); //Depending on the value (1 thru -1, takes the percent of that number = signal sent)
         rightMaster.set(ControlMode.PercentOutput, right); //Depending on the value (1 thru -1, takes the percent of that number = signal sent)
     }
 
@@ -95,7 +94,7 @@ public class Drivetrain implements Subsystem {
      */
     public void resetEncoders() {
         resetEncoders(0, 0);
-    }
+    } // when this executes, it reset the enc position of TalonFX's
     
     /**
      * Sets encoders to a specific value
