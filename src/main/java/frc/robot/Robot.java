@@ -120,20 +120,20 @@ public class Robot extends TimedRobot {
 
 
     // MAIN AUTO
-    CommandScheduler.getInstance().schedule(
-      new SequentialCommandGroup(
-    //     // new InstantCommand(() -> RobotContainer.wrist.setWristPositionAuto(Intake.ScorePos.STOW), RobotContainer.wrist),
-    //     // new InstantCommand(() -> RobotContainer.arm.setArmPositionAuto(Intake.ScorePos.STOW), RobotContainer.arm),
-    //     new RunCommand(() -> RobotContainer.intake.set(0.9), RobotContainer.intake).withTimeout(0.25),
-    //     new WaitCommand(0.5),
-        new RunCommand(() -> Drivetrain.setOpenLoop(-0.25, -0.25), RobotContainer.drivetrain).withTimeout(2.25),
-        new RunCommand(() -> RobotContainer.intake.set(0)).withTimeout(1.5)
-        )
-      );
+    // CommandScheduler.getInstance().schedule(
+    //   new SequentialCommandGroup(
+    // //     // new InstantCommand(() -> RobotContainer.wrist.setWristPositionAuto(Intake.ScorePos.STOW), RobotContainer.wrist),
+    // //     // new InstantCommand(() -> RobotContainer.arm.setArmPositionAuto(Intake.ScorePos.STOW), RobotContainer.arm),
+    // //     new RunCommand(() -> RobotContainer.intake.set(0.9), RobotContainer.intake).withTimeout(0.25),
+    // //     new WaitCommand(0.5),
+    //     new RunCommand(() -> Drivetrain.setOpenLoop(-0.25, -0.25), RobotContainer.drivetrain).withTimeout(2.25),
+    //     new RunCommand(() -> RobotContainer.intake.set(0)).withTimeout(1.5)
+    //     )
+    //   );
     // Main Auto: low cone & mobility
 
     //MID CONE AUTO
-    // CommandScheduler.getInstance().schedule(Auto.highConeBackup());
+    CommandScheduler.getInstance().schedule(Auto.highConeBackup());
     // // Mid Cone Auto: mid cone & mobility
 
     //WIP Possibilities???

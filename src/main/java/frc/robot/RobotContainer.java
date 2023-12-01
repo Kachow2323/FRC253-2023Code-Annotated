@@ -479,6 +479,7 @@ public class RobotContainer {
      */
     public void setLEDMode(LEDMode ledMode) {
         limelight.getEntry("ledMode").setNumber(ledMode.val);
+        // The limelight's light can changed from on, off, left side only, right side only. Each pos represented by number 91-4)
     }
     /**
      * Sets the appearance of the Limelight camera stream
@@ -549,7 +550,7 @@ public class RobotContainer {
      * Enum representing the different possible Limelight vision pipelines
      */
     public enum VisionPipeline {
-        VISION(0), DRIVER(1);
+        VISION(0), DRIVER(1); //There are multiple pipelines, one for vision and one for driver view
 
         public int val;
 
@@ -568,7 +569,7 @@ public class RobotContainer {
         }
         
     }
-    public enum ShooterVisionPipeline {
+    public enum ShooterVisionPipeline { //ignore
         ROBOT(0);
 
         public int val;
